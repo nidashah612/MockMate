@@ -53,7 +53,8 @@ CRITICAL ADAPTIVE RULES:
    - If previous answer was vague or missing quantitative metrics, ask a direct follow-up question cross-examining their claim.
 4. Keep questions natural, spoken-style, clear, and direct.
 
-## d. Tools, Services, and AI Models Used
+### d. **Tools, Services, and AI Models Used:**
+--text
 - **Frontend Framework:** React 19, TypeScript, Tailwind CSS, Recharts, Lucide-React icons.
 - **Backend Server:** Express.js, `tsx` runtime, `esbuild` CommonJS bundler.
 - **AI SDK:** `@google/genai` TypeScript SDK.
@@ -62,7 +63,7 @@ CRITICAL ADAPTIVE RULES:
   - `gemini-3.1-flash-tts-preview` (Server-side text-to-speech audio synthesis)
 - **Audio APIs:** Web Speech API (SpeechRecognition for STT speech input & SpeechSynthesis for voice playback).
 
-## e. Screenshots of the App in Action
+## e. Screenshots of the App in Action:
 1. **Analytics Progress Dashboard:** Overall readiness score, Recharts progress line chart, skill mastery radar, active weak spots heatmap, and interview history log.
 <img width="692" height="402" alt="image" src="https://github.com/user-attachments/assets/7040e885-aa3a-4dab-8a22-96bbf429f151" />
 
@@ -77,7 +78,7 @@ CRITICAL ADAPTIVE RULES:
 <img width="692" height="560" alt="image" src="https://github.com/user-attachments/assets/cae66f7d-66d7-4cc1-9aed-4da5c2b8a00e" />
 <img width="692" height="637" alt="image" src="https://github.com/user-attachments/assets/dda9d330-a769-4cbb-95da-c04e1205966d" />
 
-## f. How to Run the Project Locally
+### f. How to Run the Project Locally
 
 ### Prerequisites
 - Node.js 20+ installed.
