@@ -33,7 +33,8 @@ async function generateJSON<T>(prompt: string, systemInstruction?: string): Prom
       }
     });
 
-    const text = response.text || "{}";
+    let text = response.text || "{}";
+    text = text.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/\s*```$/, "").trim();
     return JSON.parse(text) as T;
   } catch (error) {
     console.error("Gemini JSON Generation Error:", error);

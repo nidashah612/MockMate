@@ -10,13 +10,46 @@ import { SessionReportCard } from './components/SessionReportCard';
 import { Dashboard } from './components/Dashboard';
 import { WeakSpotMemoryView } from './components/WeakSpotMemoryView';
 import { STARStoryBankView } from './components/STARStoryBankView';
+import { ProgressAnalyticsView } from './components/ProgressAnalyticsView';
 
 const MainAppContent: React.FC = () => {
   const { activeSession, setActiveSession } = useInterview();
-  const [currentTab, setCurrentTab] = useState<string>('dashboard');
+  const [tabHistory, setTabHistory] = useState<string[]>(['dashboard']);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
   const [isViewingReport, setIsViewingReport] = useState(false);
+
+  const currentTab = tabHistory[tabHistory.length - 1] || 'dashboard';
+
+  const handleNavigateTab = (newTab: string) => {
+    setIsViewingReport(false);
+    if (activeSession && activeSession.status === 'in_progress') {
+      setActiveSession({
+        ...activeSession,
+        status: 'completed'
+      });
+    }
+    if (newTab === currentTab) return;
+    setTabHistory((prev) => [...prev, newTab]);
+  };
+
+  const handleGoBack = () => {
+    if (isViewingReport) {
+      setIsViewingReport(false);
+      return;
+    }
+    if (activeSession && activeSession.status === 'in_progress') {
+      setActiveSession({
+        ...activeSession,
+        status: 'completed'
+      });
+    }
+    if (tabHistory.length > 1) {
+      setTabHistory((prev) => prev.slice(0, -1));
+    } else {
+      setTabHistory(['dashboard']);
+    }
+  };
 
   const handleStartNewInterview = () => {
     setIsSetupModalOpen(true);
@@ -27,6 +60,12 @@ const MainAppContent: React.FC = () => {
   };
 
   const handleFinishSession = () => {
+    if (activeSession) {
+      setActiveSession({
+        ...activeSession,
+        status: 'completed'
+      });
+    }
     setIsViewingReport(true);
   };
 
@@ -34,10 +73,8 @@ const MainAppContent: React.FC = () => {
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-slate-800 selection:text-white">
       <Navbar
         currentTab={currentTab}
-        setCurrentTab={(tab) => {
-          setCurrentTab(tab);
-          setIsViewingReport(false);
-        }}
+        setCurrentTab={handleNavigateTab}
+        onGoBack={handleGoBack}
         onOpenAuthModal={() => setIsAuthModalOpen(true)}
         onStartNewInterview={handleStartNewInterview}
       />
@@ -50,7 +87,7 @@ const MainAppContent: React.FC = () => {
           <SessionReportCard
             onBackToDashboard={() => {
               setIsViewingReport(false);
-              setCurrentTab('dashboard');
+              handleNavigateTab('dashboard');
             }}
             onStartNewSession={handleStartNewInterview}
           />
@@ -59,18 +96,35 @@ const MainAppContent: React.FC = () => {
             {currentTab === 'dashboard' && (
               <Dashboard
                 onStartNewInterview={handleStartNewInterview}
-                onNavigateTab={setCurrentTab}
+                onNavigateTab={handleNavigateTab}
                 onViewReport={() => setIsViewingReport(true)}
               />
             )}
 
-            {currentTab === 'target-profiles' && <TargetProfileManager />}
-
-            {currentTab === 'memory' && (
-              <WeakSpotMemoryView onStartTargetedInterview={handleStartNewInterview} />
+            {currentTab === 'target-profiles' && (
+              <TargetProfileManager
+                onBack={handleGoBack}
+                onStartInterview={handleStartNewInterview}
+              />
             )}
 
-            {currentTab === 'star-bank' && <STARStoryBankView />}
+            {currentTab === 'memory' && (
+              <WeakSpotMemoryView
+                onBack={handleGoBack}
+                onStartTargetedInterview={handleStartNewInterview}
+              />
+            )}
+
+            {currentTab === 'star-bank' && (
+              <STARStoryBankView onBack={handleGoBack} />
+            )}
+
+            {currentTab === 'progress' && (
+              <ProgressAnalyticsView
+                onBack={handleGoBack}
+                onStartNewInterview={handleStartNewInterview}
+              />
+            )}
           </>
         )}
       </main>
@@ -82,15 +136,19 @@ const MainAppContent: React.FC = () => {
             <strong className="text-slate-800">MockMate</strong> — AI Adaptive Mock Interviewer & Persistent Memory Coach
           </div>
           <div className="flex items-center space-x-4">
-            <button onClick={() => setCurrentTab('target-profiles')} className="hover:text-slate-900 font-medium">
+            <button onClick={() => handleNavigateTab('progress')} className="hover:text-slate-900 font-medium">
+              Progress & Analytics
+            </button>
+            <span>•</span>
+            <button onClick={() => handleNavigateTab('target-profiles')} className="hover:text-slate-900 font-medium">
               Target Roles
             </button>
             <span>•</span>
-            <button onClick={() => setCurrentTab('memory')} className="hover:text-slate-900 font-medium">
+            <button onClick={() => handleNavigateTab('memory')} className="hover:text-slate-900 font-medium">
               Weak Spots Memory
             </button>
             <span>•</span>
-            <button onClick={() => setCurrentTab('star-bank')} className="hover:text-slate-900 font-medium">
+            <button onClick={() => handleNavigateTab('star-bank')} className="hover:text-slate-900 font-medium">
               STAR Story Bank
             </button>
           </div>

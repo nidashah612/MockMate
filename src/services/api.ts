@@ -21,14 +21,21 @@ function getUserIdHeader(): Record<string, string> {
   return { 'x-user-id': 'demo-user' };
 }
 
+async function handleResponse<T>(res: Response, defaultError: string): Promise<T> {
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || err.message || defaultError);
+  }
+  return res.json();
+}
+
 export async function loginApi(email: string, password?: string): Promise<{ user: UserProfile }> {
   const res = await fetch('/api/auth/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
   });
-  if (!res.ok) throw new Error('Login failed');
-  return res.json();
+  return handleResponse<{ user: UserProfile }>(res, 'Login failed');
 }
 
 export async function registerApi(email: string, name: string, password?: string): Promise<{ user: UserProfile }> {
@@ -37,8 +44,7 @@ export async function registerApi(email: string, name: string, password?: string
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, name, password })
   });
-  if (!res.ok) throw new Error('Registration failed');
-  return res.json();
+  return handleResponse<{ user: UserProfile }>(res, 'Registration failed');
 }
 
 export async function resetPasswordApi(email: string): Promise<{ success: boolean; message: string }> {
@@ -47,24 +53,21 @@ export async function resetPasswordApi(email: string): Promise<{ success: boolea
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email })
   });
-  if (!res.ok) throw new Error('Password reset failed');
-  return res.json();
+  return handleResponse<{ success: boolean; message: string }>(res, 'Password reset failed');
 }
 
 export async function fetchCurrentAuthUser(): Promise<{ user: UserProfile }> {
   const res = await fetch('/api/auth/me', {
     headers: getUserIdHeader()
   });
-  if (!res.ok) throw new Error('Failed to get current user');
-  return res.json();
+  return handleResponse<{ user: UserProfile }>(res, 'Failed to get current user');
 }
 
 export async function fetchTargetProfiles(): Promise<TargetProfile[]> {
   const res = await fetch('/api/target-profiles', {
     headers: getUserIdHeader()
   });
-  if (!res.ok) throw new Error('Failed to fetch target profiles');
-  const data = await res.json();
+  const data = await handleResponse<{ profiles: TargetProfile[] }>(res, 'Failed to fetch target profiles');
   return data.profiles;
 }
 
@@ -80,8 +83,7 @@ export async function createTargetProfile(payload: {
     headers: { 'Content-Type': 'application/json', ...getUserIdHeader() },
     body: JSON.stringify(payload)
   });
-  if (!res.ok) throw new Error('Failed to create target profile');
-  const data = await res.json();
+  const data = await handleResponse<{ profile: TargetProfile }>(res, 'Failed to create target profile');
   return data.profile;
 }
 
@@ -90,7 +92,7 @@ export async function deleteTargetProfileApi(id: string): Promise<void> {
     method: 'DELETE',
     headers: getUserIdHeader()
   });
-  if (!res.ok) throw new Error('Failed to delete target profile');
+  await handleResponse<{ success: boolean }>(res, 'Failed to delete target profile');
 }
 
 export async function parseDocumentsApi(jobDescription: string, resumeText: string) {
@@ -99,8 +101,7 @@ export async function parseDocumentsApi(jobDescription: string, resumeText: stri
     headers: { 'Content-Type': 'application/json', ...getUserIdHeader() },
     body: JSON.stringify({ jobDescription, resumeText })
   });
-  if (!res.ok) throw new Error('Parsing documents failed');
-  const data = await res.json();
+  const data = await handleResponse<{ parsed: any }>(res, 'Parsing documents failed');
   return data.parsed;
 }
 
@@ -116,8 +117,7 @@ export async function startInterviewApi(payload: {
     headers: { 'Content-Type': 'application/json', ...getUserIdHeader() },
     body: JSON.stringify(payload)
   });
-  if (!res.ok) throw new Error('Failed to start interview');
-  const data = await res.json();
+  const data = await handleResponse<{ session: InterviewSession }>(res, 'Failed to start interview');
   return data.session;
 }
 
@@ -131,16 +131,17 @@ export async function submitAnswerApi(payload: {
     headers: { 'Content-Type': 'application/json', ...getUserIdHeader() },
     body: JSON.stringify(payload)
   });
-  if (!res.ok) throw new Error('Failed to submit answer');
-  return res.json();
+  return handleResponse<{ session: InterviewSession; isSessionComplete: boolean; evaluation: QuestionEvaluation }>(
+    res,
+    'Failed to submit answer'
+  );
 }
 
 export async function fetchWeakSpots(): Promise<WeakSpotItem[]> {
   const res = await fetch('/api/weak-spots', {
     headers: getUserIdHeader()
   });
-  if (!res.ok) throw new Error('Failed to fetch weak spots');
-  const data = await res.json();
+  const data = await handleResponse<{ weakSpots: WeakSpotItem[] }>(res, 'Failed to fetch weak spots');
   return data.weakSpots;
 }
 
@@ -150,15 +151,14 @@ export async function updateWeakSpotStatusApi(id: string, status: 'active' | 'im
     headers: { 'Content-Type': 'application/json', ...getUserIdHeader() },
     body: JSON.stringify({ status })
   });
-  if (!res.ok) throw new Error('Failed to update weak spot status');
+  await handleResponse<{ success: boolean }>(res, 'Failed to update weak spot status');
 }
 
 export async function fetchSTARStories(): Promise<STARStory[]> {
   const res = await fetch('/api/star-stories', {
     headers: getUserIdHeader()
   });
-  if (!res.ok) throw new Error('Failed to fetch STAR stories');
-  const data = await res.json();
+  const data = await handleResponse<{ stories: STARStory[] }>(res, 'Failed to fetch STAR stories');
   return data.stories;
 }
 
@@ -168,8 +168,7 @@ export async function createSTARStoryApi(story: Partial<STARStory>): Promise<STA
     headers: { 'Content-Type': 'application/json', ...getUserIdHeader() },
     body: JSON.stringify(story)
   });
-  if (!res.ok) throw new Error('Failed to create STAR story');
-  const data = await res.json();
+  const data = await handleResponse<{ story: STARStory }>(res, 'Failed to create STAR story');
   return data.story;
 }
 
@@ -178,8 +177,7 @@ export async function polishSTARStoryApi(id: string): Promise<STARStory> {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', ...getUserIdHeader() }
   });
-  if (!res.ok) throw new Error('Failed to polish STAR story');
-  const data = await res.json();
+  const data = await handleResponse<{ story: STARStory }>(res, 'Failed to polish STAR story');
   return data.story;
 }
 
@@ -188,15 +186,14 @@ export async function deleteSTARStoryApi(id: string): Promise<void> {
     method: 'DELETE',
     headers: getUserIdHeader()
   });
-  if (!res.ok) throw new Error('Failed to delete STAR story');
+  await handleResponse<{ success: boolean }>(res, 'Failed to delete STAR story');
 }
 
 export async function fetchAnalytics(): Promise<AnalyticsSummary> {
   const res = await fetch('/api/analytics', {
     headers: getUserIdHeader()
   });
-  if (!res.ok) throw new Error('Failed to fetch analytics');
-  const data = await res.json();
+  const data = await handleResponse<{ analytics: AnalyticsSummary }>(res, 'Failed to fetch analytics');
   return data.analytics;
 }
 

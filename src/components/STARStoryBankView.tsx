@@ -11,10 +11,15 @@ import {
   Tag,
   Zap,
   ChevronDown,
-  X
+  X,
+  ArrowLeft
 } from 'lucide-react';
 
-export const STARStoryBankView: React.FC = () => {
+interface STARStoryBankViewProps {
+  onBack?: () => void;
+}
+
+export const STARStoryBankView: React.FC<STARStoryBankViewProps> = ({ onBack }) => {
   const { starStories, addSTARStory, polishSTARStory, deleteSTARStory } = useInterview();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -74,6 +79,16 @@ export const STARStoryBankView: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fadeIn">
+      {onBack && (
+        <button
+          onClick={onBack}
+          className="inline-flex items-center space-x-2 text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 px-3.5 py-2 rounded-xl transition-all shadow-xs hover:scale-[1.02] active:scale-[0.98]"
+        >
+          <ArrowLeft className="w-4 h-4 text-slate-800" />
+          <span>Back to Recent Page</span>
+        </button>
+      )}
+
       {/* Top Banner */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white border border-slate-200 rounded-3xl p-8 shadow-xs">
         <div>

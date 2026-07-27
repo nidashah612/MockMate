@@ -8,7 +8,7 @@ interface AuthContextType {
   login: (email: string, password?: string) => Promise<void>;
   register: (email: string, name: string, password?: string) => Promise<void>;
   resetPassword: (email: string) => Promise<string>;
-  loginWithGoogle: () => Promise<void>;
+  loginWithGoogle: (customEmail?: string, customName?: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -78,14 +78,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return res.message;
   };
 
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (customEmail?: string, customName?: string) => {
     setLoading(true);
     try {
-      // Simulate OAuth login
+      const email = customEmail || 'google.candidate@gmail.com';
+      const name = customName || 'Google Candidate';
+      let res;
+      try {
+        res = await registerApi(email, name);
+      } catch (e) {
+        res = await loginApi(email);
+      }
+      if (res?.user) {
+        setUser(res.user);
+        localStorage.setItem('mockmate_user', JSON.stringify(res.user));
+      }
+    } catch (e: any) {
+      console.warn('Google sign in error, fallback to demo user:', e);
       const googleUser: UserProfile = {
-        id: 'usr_google_' + Date.now().toString(36),
-        email: 'alex.google@example.com',
-        name: 'Alex Rivera (Google)',
+        id: 'demo-user',
+        email: customEmail || 'google.candidate@gmail.com',
+        name: customName || 'Google Candidate',
         avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
         createdAt: new Date().toISOString()
       };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useInterview } from '../context/InterviewContext';
+import { parseResumeFile } from '../utils/pdfExtractor';
 import {
   Target,
   FileText,
@@ -12,10 +13,17 @@ import {
   Zap,
   Building,
   Upload,
-  Layers
+  Layers,
+  ArrowLeft,
+  Loader2
 } from 'lucide-react';
 
-export const TargetProfileManager: React.FC = () => {
+interface TargetProfileManagerProps {
+  onBack?: () => void;
+  onStartInterview?: () => void;
+}
+
+export const TargetProfileManager: React.FC<TargetProfileManagerProps> = ({ onBack, onStartInterview }) => {
   const { targetProfiles, activeProfile, setActiveProfile, addProfile, deleteProfile } = useInterview();
   const [showAddForm, setShowAddForm] = useState(false);
   const [title, setTitle] = useState('');
@@ -23,6 +31,7 @@ export const TargetProfileManager: React.FC = () => {
   const [roleCategory, setRoleCategory] = useState('Frontend Engineering');
   const [jobDescription, setJobDescription] = useState('');
   const [resumeText, setResumeText] = useState('');
+  const [isParsingFile, setIsParsingFile] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -64,6 +73,23 @@ Lead Backend Engineer @ CloudSync (2021 - Present)
 
 Full Stack Developer @ DataStack (2017 - 2021)
 - Designed real-time event processing pipelines using Kafka & Express.js server endpoints.`
+    },
+    {
+      label: 'Dr. Taylor Reed (Biotech & Research Scientist)',
+      text: `Taylor Reed, Ph.D. | Senior Laboratory & Research Associate
+Email: taylor.reed@biotech-research.org
+
+SUMMARY:
+Biotechnology researcher with 5+ years of lab experience in drug formulation, cell culture, molecular assays, GLP/GMP compliance, and experimental data analysis.
+
+EXPERIENCE:
+Research Associate @ Scotman Pharmaceutical (2022 - Present)
+- Calibrated and maintained complex bio-analytical spectrometry & HPLC lab equipment with 99.8% uptime.
+- Conducted R&D experimental trials for novel drug delivery formulations, documenting SOPs in compliance with GLP/GMP.
+- Coordinated cross-functionally with Quality Assurance and Regulatory teams to accelerate audit readiness.
+
+Graduate Researcher @ University Bio Labs (2019 - 2022)
+- Managed cell culture incubators, PCR gene expression analysis, and protein purification protocols.`
     }
   ];
 
@@ -136,15 +162,21 @@ Requirements:
     }
   ];
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const text = event.target?.result as string;
-        setResumeText(text || '');
-      };
-      reader.readAsText(file);
+    if (!file) return;
+
+    setError(null);
+    setIsParsingFile(true);
+    try {
+      const parsedText = await parseResumeFile(file);
+      setResumeText(parsedText);
+    } catch (err: any) {
+      setError(err.message || 'Failed to extract text from uploaded file.');
+    } finally {
+      setIsParsingFile(false);
+      // reset file input
+      e.target.value = '';
     }
   };
 
@@ -178,6 +210,16 @@ Requirements:
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-fadeIn">
+      {onBack && (
+        <button
+          onClick={onBack}
+          className="inline-flex items-center space-x-2 text-xs font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-300 px-3.5 py-2 rounded-xl transition-all shadow-xs hover:scale-[1.02] active:scale-[0.98]"
+        >
+          <ArrowLeft className="w-4 h-4 text-slate-800" />
+          <span>Back to Recent Page</span>
+        </button>
+      )}
+
       {/* Top Banner */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
         <div>
@@ -320,10 +362,14 @@ Requirements:
                 <label className="block text-xs font-semibold text-slate-700">
                   Paste or Upload Resume *
                 </label>
-                <label className="cursor-pointer text-[11px] text-slate-800 hover:text-slate-900 font-semibold flex items-center space-x-1">
-                  <Upload className="w-3 h-3" />
-                  <span>Upload .txt/.md</span>
-                  <input type="file" accept=".txt,.md,.pdf,.doc" onChange={handleFileUpload} className="hidden" />
+                <label className="cursor-pointer text-[11px] text-slate-800 hover:text-slate-900 font-semibold flex items-center space-x-1.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 px-2.5 py-1 rounded-lg transition-colors">
+                  {isParsingFile ? (
+                    <Loader2 className="w-3.5 h-3.5 text-slate-800 animate-spin" />
+                  ) : (
+                    <Upload className="w-3.5 h-3.5 text-slate-800" />
+                  )}
+                  <span>{isParsingFile ? 'Extracting PDF...' : 'Upload PDF / Text'}</span>
+                  <input type="file" accept=".pdf,.txt,.md,.doc,.docx" onChange={handleFileUpload} disabled={isParsingFile} className="hidden" />
                 </label>
               </div>
 
@@ -454,14 +500,26 @@ Requirements:
 
               <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                 <button
-                  onClick={() => setActiveProfile(tp)}
-                  className={`w-full py-2 text-xs font-semibold rounded-xl transition-all ${
+                  onClick={() => {
+                    setActiveProfile(tp);
+                    if (onStartInterview) {
+                      onStartInterview();
+                    }
+                  }}
+                  className={`w-full py-2.5 text-xs font-bold rounded-xl transition-all flex items-center justify-center space-x-2 shadow-2xs ${
                     isActive
-                      ? 'bg-slate-900 text-white cursor-default border border-slate-900'
-                      : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200'
+                      ? 'bg-slate-900 hover:bg-slate-800 text-white border border-slate-900 hover:scale-[1.01]'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300'
                   }`}
                 >
-                  {isActive ? 'Active Target Role' : 'Set as Active Target Role'}
+                  {isActive ? (
+                    <>
+                      <Zap className="w-3.5 h-3.5 text-amber-400 fill-current" />
+                      <span>Active Target Role • Start Mock Interview</span>
+                    </>
+                  ) : (
+                    <span>Set as Active Target Role</span>
+                  )}
                 </button>
               </div>
             </div>

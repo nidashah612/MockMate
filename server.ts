@@ -86,18 +86,32 @@ app.use(express.json({ limit: "10mb" }));
         return res.status(400).json({ error: "Title, Job Description, and Resume text are required" });
       }
 
-      // Parse with Gemini
+      // Parse with Gemini (with 10s safety timeout race)
       let parsedSummary;
       try {
-        parsedSummary = await parseJobAndResume(jobDescription, resumeText);
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("AI document parsing timed out")), 10000)
+        );
+        parsedSummary = (await Promise.race([
+          parseJobAndResume(jobDescription, resumeText),
+          timeoutPromise
+        ])) as any;
       } catch (e) {
-        console.warn("Failed to parse JD & Resume with AI, using fallback:", e);
+        console.warn("Failed to parse JD & Resume with AI, using domain fallback:", e);
         parsedSummary = {
-          keyRequirements: ["Core software engineering skills", "Problem solving & architecture"],
-          technicalStack: ["TypeScript", "React", "Node.js"],
-          matchingSkills: ["React", "TypeScript"],
-          potentialGaps: ["Specific system scale metrics"],
-          suggestedFocusAreas: ["Technical trade-offs", "STAR behavioral stories"]
+          keyRequirements: [
+            "Core domain competence & problem solving",
+            "Effective oral & written communication",
+            "Project management & execution rigor"
+          ],
+          technicalStack: [roleCategory || "General Professional", "Core Industry Tools"],
+          matchingSkills: ["Core background preparation", "Technical / Functional foundation"],
+          potentialGaps: ["Specific company workflow alignment"],
+          suggestedFocusAreas: [
+            `${roleCategory || "Role"} technical depth`,
+            "Behavioral STAR experience stories",
+            "Domain trade-offs & problem solving"
+          ]
         };
       }
 

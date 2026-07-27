@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAuth } from './AuthContext';
 import {
   TargetProfile,
   InterviewSession,
@@ -61,6 +62,9 @@ interface InterviewContextType {
 const InterviewContext = createContext<InterviewContextType | null>(null);
 
 export const InterviewProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const auth = useAuth();
+  const userId = auth?.user?.id;
+
   const [targetProfiles, setTargetProfiles] = useState<TargetProfile[]>([]);
   const [activeProfile, setActiveProfile] = useState<TargetProfile | null>(null);
   const [activeSession, setActiveSession] = useState<InterviewSession | null>(null);
@@ -78,8 +82,10 @@ export const InterviewProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         fetchAnalytics()
       ]);
       setTargetProfiles(profiles);
-      if (profiles.length > 0 && !activeProfile) {
-        setActiveProfile(profiles[0]);
+      if (profiles.length > 0) {
+        setActiveProfile((prev) => (prev ? profiles.find((p) => p.id === prev.id) || profiles[0] : profiles[0]));
+      } else {
+        setActiveProfile(null);
       }
       setWeakSpots(ws);
       setStarStories(stories);
@@ -93,7 +99,7 @@ export const InterviewProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   useEffect(() => {
     refreshData();
-  }, []);
+  }, [userId]);
 
   const addProfile = async (payload: {
     title: string;
