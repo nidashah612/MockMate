@@ -83,9 +83,12 @@ CRITICAL ADAPTIVE RULES:
 
 ## f. Screenshots of the App in Action
 1. **Analytics Progress Dashboard:** Overall readiness score, Recharts progress line chart, skill mastery radar, active weak spots heatmap, and interview history log.
+![Analytics Dashboard](./screenshots/dashboard.jpg)
 2. **Target Role & Resume Alignment Manager:** Dual-panel editor for target Job Descriptions and candidate resumes with Gemini AI gap analysis.
 3. **Adaptive Voice-Enabled Interview Simulator:** Animated interviewer persona avatar, speech soundwave indicator, microphone speech input, and immediate micro-evaluations.
+![Interview Simulator](./screenshots/interview.jpg)
 4. **STAR Story Bank & AI Story Polisher:** Filterable repository of candidate project stories with 1-click Gemini metric polishing.
+![STAR Story Bank](./screenshots/star_stories.jpg)
 
 ---
 
