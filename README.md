@@ -1,7 +1,7 @@
 
 ---
 ## a. Live Deployed URL & Repository
-- **Live Deployed App URL:** [[https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app](https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app)](https://mock-mate-phi-six.vercel.app/)
+- **Live Deployed App URL:** (https://mock-mate-phi-six.vercel.app/)
 
 
 ---
