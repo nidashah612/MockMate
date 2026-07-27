@@ -1,6 +1,6 @@
 
 ---
-## a. Live Deployed URL & Repository
+## a. Live Deployed URL
 - **Live Deployed App URL:** (https://mock-mate-phi-six.vercel.app/)
 
 
