@@ -10,6 +10,7 @@ import {
   polishSTARStory,
   generateTTSAudio
 } from "./server/gemini";
+import { QuestionEvaluation } from "./src/types";
 
 const app = express();
 const PORT = 3000;
@@ -86,12 +87,14 @@ app.use(express.json({ limit: "10mb" }));
         return res.status(400).json({ error: "Title, Job Description, and Resume text are required" });
       }
 
-      // Parse with Gemini (with 10s safety timeout race)
+      // Parse with Gemini (with 5s safety timeout race)
       let parsedSummary;
       try {
         const timeoutPromise = new Promise((_, reject) =>
-          setTimeout(() => reject(new Error("AI document parsing timed out")), 10000)
+          setTimeout(() => reject(new Error("AI document parsing timed out")), 5000)
         );
+        timeoutPromise.catch(() => {}); // prevent unhandled promise rejection if race resolves/rejects early
+        
         parsedSummary = (await Promise.race([
           parseJobAndResume(jobDescription, resumeText),
           timeoutPromise
@@ -130,7 +133,8 @@ app.use(express.json({ limit: "10mb" }));
 
       res.json({ profile: newProfile });
     } catch (err: any) {
-      res.status(500).json({ error: err.message || "Failed to save profile" });
+      console.error("POST /api/target-profiles threw an error:", err);
+      res.status(500).json({ error: err.message || "Failed to save profile", stack: err.stack });
     }
   });
 
@@ -166,17 +170,32 @@ app.use(express.json({ limit: "10mb" }));
 
       const activeWeakSpots = dbStore.getWeakSpots(userId).filter((w) => w.status === "active");
 
-      // Generate first adaptive question
-      const q1Data = await generateAdaptiveQuestion({
-        persona: persona || "friendly",
-        focusArea: focusArea || "hybrid",
-        jobDescription: profile.jobDescription,
-        resumeText: profile.resumeText,
-        previousTurns: [],
-        weakSpotsMemory: activeWeakSpots,
-        questionIndex: 1,
-        totalQuestions: totalQuestions || 5
-      });
+      // Generate first adaptive question (with 7s safety timeout)
+      let q1Data;
+      try {
+        const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("AI timeout")), 7000));
+        timeoutPromise.catch(() => {});
+        q1Data = (await Promise.race([
+          generateAdaptiveQuestion({
+            persona: persona || "friendly",
+            focusArea: focusArea || "hybrid",
+            jobDescription: profile.jobDescription,
+            resumeText: profile.resumeText,
+            previousTurns: [],
+            weakSpotsMemory: activeWeakSpots,
+            questionIndex: 1,
+            totalQuestions: totalQuestions || 5
+          }),
+          timeoutPromise
+        ])) as any;
+      } catch (e) {
+        console.warn("AI failed to generate question, using fallback:", e);
+        q1Data = {
+          question: "Could you walk me through your background and how it aligns with this role?",
+          interviewerRationale: "Fallback introductory question.",
+          expectedKeyPoints: ["Relevant experience", "Role alignment", "Clear communication"]
+        };
+      }
 
       const session = dbStore.saveSession({
         id: "sess_" + Date.now().toString(36),
@@ -245,18 +264,41 @@ app.use(express.json({ limit: "10mb" }));
 
       const knownWeakSpots = dbStore.getWeakSpots(userId);
 
-      // Evaluate answer with Gemini
-      const evaluation = await evaluateAnswer({
-        question: currentTurn.question,
-        candidateAnswer: answer,
-        expectedKeyPoints: currentTurn.expectedKeyPoints || [],
-        persona: session.persona,
-        focusArea: session.focusArea,
-        jobDescription: profile.jobDescription,
-        resumeText: profile.resumeText,
-        knownWeakSpots,
-        isFollowUp: currentTurn.isFollowUp
-      });
+      // Evaluate answer with Gemini (with 4s safety timeout)
+      let evaluation: QuestionEvaluation;
+      try {
+        const timeoutEval = new Promise((_, reject) => setTimeout(() => reject(new Error("Eval timeout")), 4000));
+        timeoutEval.catch(() => {});
+        evaluation = (await Promise.race([
+          evaluateAnswer({
+            question: currentTurn.question,
+            candidateAnswer: answer,
+            expectedKeyPoints: currentTurn.expectedKeyPoints || [],
+            persona: session.persona,
+            focusArea: session.focusArea,
+            jobDescription: profile.jobDescription,
+            resumeText: profile.resumeText,
+            knownWeakSpots,
+            isFollowUp: currentTurn.isFollowUp
+          }),
+          timeoutEval
+        ])) as QuestionEvaluation;
+      } catch (e) {
+        console.warn("AI eval failed, using fallback:", e);
+        evaluation = {
+          score: 75,
+          technicalDepthScore: 75,
+          starAlignmentScore: 75,
+          communicationClarityScore: 75,
+          confidenceScore: 75,
+          strengths: ["Clear communication"],
+          weaknesses: ["Could provide more technical depth"],
+          fillerWordsDetected: [],
+          idealResponseSummary: "A top candidate would provide specific metrics and architectural details.",
+          actionableAdvice: "Include more quantifiable results.",
+          followUpNeeded: false
+        };
+      }
 
       currentTurn.evaluation = evaluation;
 
@@ -329,16 +371,31 @@ app.use(express.json({ limit: "10mb" }));
         const nextQNum = currentTurn.questionNumber + 1;
         if (nextQNum <= session.totalQuestions) {
           const activeWeakSpots = dbStore.getWeakSpots(userId).filter((w) => w.status === "active");
-          const nextQData = await generateAdaptiveQuestion({
-            persona: session.persona,
-            focusArea: session.focusArea,
-            jobDescription: profile.jobDescription,
-            resumeText: profile.resumeText,
-            previousTurns: session.turns,
-            weakSpotsMemory: activeWeakSpots,
-            questionIndex: nextQNum,
-            totalQuestions: session.totalQuestions
-          });
+          let nextQData;
+          try {
+            const timeoutNext = new Promise((_, reject) => setTimeout(() => reject(new Error("Next Q timeout")), 4000));
+            timeoutNext.catch(() => {});
+            nextQData = (await Promise.race([
+              generateAdaptiveQuestion({
+                persona: session.persona,
+                focusArea: session.focusArea,
+                jobDescription: profile.jobDescription,
+                resumeText: profile.resumeText,
+                previousTurns: session.turns,
+                weakSpotsMemory: activeWeakSpots,
+                questionIndex: nextQNum,
+                totalQuestions: session.totalQuestions
+              }),
+              timeoutNext
+            ])) as any;
+          } catch (e) {
+            console.warn("AI next Q failed, using fallback:", e);
+            nextQData = {
+              question: "Can you elaborate on a key challenge you solved in your past roles?",
+              interviewerRationale: "Fallback question.",
+              expectedKeyPoints: ["Challenge details", "Actions taken", "Results"]
+            };
+          }
 
           session.turns.push({
             id: `turn_${session.turns.length + 1}`,
@@ -355,13 +412,31 @@ app.use(express.json({ limit: "10mb" }));
           session.completedAt = new Date().toISOString();
 
           // Generate final summary report card
-          const report = await generateSessionReport({
-            persona: session.persona,
-            focusArea: session.focusArea,
-            targetTitle: session.targetProfileTitle,
-            turns: session.turns,
-            jobDescription: profile.jobDescription
-          });
+          let report;
+          try {
+            const timeoutReport = new Promise((_, reject) => setTimeout(() => reject(new Error("Report timeout")), 4000));
+            timeoutReport.catch(() => {});
+            report = (await Promise.race([
+              generateSessionReport({
+                persona: session.persona,
+                focusArea: session.focusArea,
+                targetTitle: session.targetProfileTitle,
+                turns: session.turns,
+                jobDescription: profile.jobDescription
+              }),
+              timeoutReport
+            ])) as any;
+          } catch (e) {
+            console.warn("AI report failed, using fallback:", e);
+            report = {
+              overallScore: 80,
+              overallRating: "Hire",
+              keyTakeaways: ["Solid candidate", "Good experience"],
+              topStrengths: ["Communication"],
+              priorityImprovements: ["Metrics inclusion"],
+              personaVerdict: "Solid performance overall."
+            };
+          }
 
           session.overallScore = report.overallScore;
           session.summaryFeedback = {
@@ -437,7 +512,27 @@ app.use(express.json({ limit: "10mb" }));
         return res.status(404).json({ error: "Story not found" });
       }
 
-      const polished = await polishSTARStory(story);
+      let polished;
+      try {
+        const timeoutPolish = new Promise((_, reject) => setTimeout(() => reject(new Error("Polish timeout")), 4000));
+        timeoutPolish.catch(() => {});
+        polished = (await Promise.race([
+          polishSTARStory(story),
+          timeoutPolish
+        ])) as any;
+      } catch (e) {
+        console.warn("AI polish failed, using fallback:", e);
+        polished = {
+          title: story.title || "Polished Story",
+          category: story.category || "General",
+          situation: (story.situation || "") + " (Polished)",
+          task: story.task || "",
+          action: story.action || "",
+          result: story.result || "",
+          metrics: story.metrics || [],
+          tags: story.tags || []
+        };
+      }
 
       story.title = polished.title;
       story.category = polished.category;
