@@ -82,6 +82,8 @@ CRITICAL ADAPTIVE RULES:
 <img width="692" height="402" alt="image" src="https://github.com/user-attachments/assets/760ffc61-f54a-401f-9ce3-49501b7956a1" />
 
 2. **Target Role & Resume Alignment Manager:** Dual-panel editor for target Job Descriptions and candidate resumes with Gemini AI gap analysis.
+   <img width="1282" height="762" alt="image" src="https://github.com/user-attachments/assets/4243dc2b-2880-4af0-8355-b6fd85f100fe" />
+
 3. **Adaptive Voice-Enabled Interview Simulator:** Animated interviewer persona avatar, speech soundwave indicator, microphone speech input, and immediate micro-evaluations.
 <img width="692" height="355" alt="image" src="https://github.com/user-attachments/assets/9de6af15-5020-47bd-a462-dd017040c1db" />
 <img width="692" height="486" alt="image" src="https://github.com/user-attachments/assets/783ab78f-c4b0-4a5b-b5c6-fc957167b966" />
