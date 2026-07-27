@@ -1,12 +1,12 @@
+# MockMate — AI-Powered Adaptive Mock Interviewer & Persistent Memory Coach
+
+[![Live Application](https://img.shields.io/badge/Live_App-Deployed-success?style=for-the-badge&logo=vercel)](https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app)
+[![Powered by Gemini API](https://img.shields.io/badge/Powered_By-Google_Gemini_3.6-blue?style=for-the-badge&logo=google)](https://ai.google.dev)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-indigo.svg?style=for-the-badge)](LICENSE)
 
 ---
-## a. Live Deployed URL
-- **Live Deployed App URL:** (https://mock-mate-phi-six.vercel.app/)
 
-
----
-
-## b. App Name, What It Does, and Real Problem Solved
+## a. App Name, What It Does, and Real Problem Solved
 
 ### **App Name:** MockMate
 
@@ -25,7 +25,11 @@ MockMate uses Google's Gemini API with a persistent **Weak-Spot Memory Engine** 
 
 ---
 
+## b. Live Deployed URL & Repository
+- **Live Deployed App URL:** [https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app](https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app)
+- **Public GitHub Repository:** [https://github.com/mockmate-ai/mockmate-core](https://github.com/mockmate-ai/mockmate-core)
 
+---
 
 ## c. Comprehensive Features List
 1. **Multi-Auth & Session Management:** Email + Password login/registration, Password Reset flow, Google Sign-In, and persistent user session storage.
@@ -79,24 +83,12 @@ CRITICAL ADAPTIVE RULES:
 
 ## f. Screenshots of the App in Action
 1. **Analytics Progress Dashboard:** Overall readiness score, Recharts progress line chart, skill mastery radar, active weak spots heatmap, and interview history log.
-<img width="692" height="402" alt="image" src="https://github.com/user-attachments/assets/760ffc61-f54a-401f-9ce3-49501b7956a1" />
-
+![Analytics Dashboard](./screenshots/dashboard.svg)
 2. **Target Role & Resume Alignment Manager:** Dual-panel editor for target Job Descriptions and candidate resumes with Gemini AI gap analysis.
-   <img width="1282" height="762" alt="image" src="https://github.com/user-attachments/assets/4243dc2b-2880-4af0-8355-b6fd85f100fe" />
-
 3. **Adaptive Voice-Enabled Interview Simulator:** Animated interviewer persona avatar, speech soundwave indicator, microphone speech input, and immediate micro-evaluations.
-<img width="692" height="355" alt="image" src="https://github.com/user-attachments/assets/9de6af15-5020-47bd-a462-dd017040c1db" />
-<img width="692" height="486" alt="image" src="https://github.com/user-attachments/assets/783ab78f-c4b0-4a5b-b5c6-fc957167b966" />
-
+![Interview Simulator](./screenshots/interview.svg)
 4. **STAR Story Bank & AI Story Polisher:** Filterable repository of candidate project stories with 1-click Gemini metric polishing.
-<img width="692" height="628" alt="image" src="https://github.com/user-attachments/assets/ffe1c9d6-80b4-4b5b-b741-706060b55bb1" />
-5.  **Weak-spot memory & remedy vault:**
-<img width="692" height="560" alt="image" src="https://github.com/user-attachments/assets/1b553d4a-db24-4b8d-9132-f14f5b9d2105" />
-6. **Personal progress:**
-<img width="692" height="637" alt="image" src="https://github.com/user-attachments/assets/3eed73e2-cdb9-435b-b8b6-fb289cf827fa" />
-7. **Progress report:**
-   <img width="642" height="761" alt="image" src="https://github.com/user-attachments/assets/2e5a3fbe-eee9-4575-bd72-09c4bad80754" />
-
+![STAR Story Bank](./screenshots/star_stories.svg)
 
 ---
 

@@ -1,0 +1,541 @@
+{
+  "users": {
+    "demo-user": {
+      "id": "demo-user",
+      "email": "alex.candidate@example.com",
+      "name": "Alex Rivera",
+      "avatarUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+      "createdAt": "2026-07-27T18:12:39.387Z"
+    },
+    "usr_ms3kysvov4ls": {
+      "id": "usr_ms3kysvov4ls",
+      "email": "nidashah6122003@gmail.com",
+      "name": "Nida Shah",
+      "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Nida%20Shah",
+      "createdAt": "2026-07-27T18:48:50.100Z"
+    }
+  },
+  "targetProfiles": {
+    "demo-target-1": {
+      "id": "demo-target-1",
+      "userId": "demo-user",
+      "title": "Senior Frontend Engineer @ Stripe",
+      "company": "Stripe",
+      "roleCategory": "Frontend Engineering",
+      "jobDescription": "Key Responsibilities:\n- Architect and build accessible, ultra-performant Web UI components for financial dashboards.\n- Optimize React component rendering pipelines and client state synchronization.\n- Lead code reviews, drive system design discussions, and mentor junior engineers.\n- Collaborate with backend APIs to build real-time transaction monitoring dashboards.\n\nRequirements:\n- 5+ years with React, TypeScript, state management, and Web Vitals optimization.\n- Proven experience handling heavy data grids and async API performance bottlenecks.\n- Excellent behavioral STAR communication and system architecture design skills.",
+      "resumeText": "Alex Rivera | Senior Frontend Developer\nEmail: alex.candidate@example.com | GitHub: github.com/alexrivera-dev\n\nSUMMARY:\nFrontend Engineer with 6 years of experience scaling React/TypeScript web apps. Specialized in performance optimization, design systems, and state management.\n\nEXPERIENCE:\nSenior Web Developer @ TechCore (2022 - Present)\n- Reduced web dashboard load time by 42% by implementing code-splitting, lazy loading, and dynamic SVG rendering.\n- Re-architected data fetching pipeline using React Query, cutting redundant API requests by 65%.\n- Led a team of 4 frontend engineers building high-density real-time analytics widgets.\n\nFrontend Software Engineer @ WebMetrics (2019 - 2022)\n- Built custom component library used across 12 micro-frontends with 100% WCAG accessibility compliance.\n- Resolved memory leaks in WebSocket streaming dashboard during heavy market volatility events.\n\nSKILLS:\nReact, TypeScript, Next.js, Webpack, Tailwind CSS, Jest, GraphQL, REST APIs, Web Vitals, WebSockets.",
+      "parsedSummary": {
+        "keyRequirements": [
+          "5+ years React & TypeScript expertise",
+          "Heavy data grid & dashboard optimization",
+          "System architecture & state management design",
+          "Behavioral STAR communication & leadership"
+        ],
+        "technicalStack": [
+          "React",
+          "TypeScript",
+          "State Management",
+          "Web Vitals",
+          "REST/GraphQL",
+          "WebSockets"
+        ],
+        "matchingSkills": [
+          "React",
+          "TypeScript",
+          "Performance Optimization",
+          "Component Libraries"
+        ],
+        "potentialGaps": [
+          "Financial transaction systems exposure",
+          "Deep GraphQL micro-frontend security"
+        ],
+        "suggestedFocusAreas": [
+          "Deep dive into React state optimization & re-render prevention",
+          "System design for high-throughput real-time payment dashboards",
+          "STAR stories detailing technical disagreement resolution"
+        ]
+      },
+      "createdAt": "2026-07-22T18:12:39.388Z",
+      "updatedAt": "2026-07-22T18:12:39.388Z"
+    },
+    "tp_ms3jtxwj": {
+      "id": "tp_ms3jtxwj",
+      "userId": "demo-user",
+      "title": "Test",
+      "company": "Target Company",
+      "roleCategory": "Software Engineering",
+      "jobDescription": "Test JD",
+      "resumeText": "Test Resume",
+      "parsedSummary": {
+        "keyRequirements": [
+          "Demonstrate core technical domain expertise aligned with the position requirements",
+          "Provide verified evidence of past performance and project impact",
+          "Show proficiency in relevant tools, frameworks, and methodologies"
+        ],
+        "technicalStack": [
+          "Software Development Lifecycle (SDLC)",
+          "Version Control Systems",
+          "Core Technical Skills (To be verified)"
+        ],
+        "matchingSkills": [
+          "General Technical Competency",
+          "Foundational Experience"
+        ],
+        "potentialGaps": [
+          "Placeholder resume provides limited specific technical metrics",
+          "Lack of detailed project outcomes and quantitative results",
+          "Unclear depth in specialized domain tools"
+        ],
+        "suggestedFocusAreas": [
+          "Hands-on coding and technical problem-solving capabilities",
+          "System design, architecture, and engineering best practices",
+          "Behavioral deep-dive into past project achievements and quantifiable impact"
+        ]
+      },
+      "createdAt": "2026-07-27T18:17:03.715Z",
+      "updatedAt": "2026-07-27T18:17:03.715Z"
+    },
+    "tp_ms3ju7uq": {
+      "id": "tp_ms3ju7uq",
+      "userId": "demo-user",
+      "title": "Test",
+      "company": "Target Company",
+      "roleCategory": "Software Engineering",
+      "jobDescription": "Test JD",
+      "resumeText": "Test Resume",
+      "parsedSummary": {
+        "keyRequirements": [
+          "Demonstrated core technical proficiency aligned with target engineering role",
+          "Ability to design, build, and maintain scalable software solutions",
+          "Proven track record of cross-functional communication and technical ownership"
+        ],
+        "technicalStack": [
+          "Software Development Lifecycle (SDLC)",
+          "Core Programming Languages",
+          "Version Control (Git)",
+          "Testing & Deployment Frameworks"
+        ],
+        "matchingSkills": [
+          "Foundational technical concepts",
+          "General engineering practices"
+        ],
+        "potentialGaps": [
+          "Lack of detailed, quantifiable impact metrics and explicit project outcomes",
+          "Insufficient evidence of specific domain depth and specialized tools usage"
+        ],
+        "suggestedFocusAreas": [
+          "Deep-dive technical assessment into core architecture and coding proficiency",
+          "System design trade-offs and handling scalability/performance challenges",
+          "Behavioral scenarios evaluating problem-solving methodology and team collaboration"
+        ]
+      },
+      "createdAt": "2026-07-27T18:17:16.610Z",
+      "updatedAt": "2026-07-27T18:17:16.610Z"
+    },
+    "tp_ms3jufsd": {
+      "id": "tp_ms3jufsd",
+      "userId": "demo-user",
+      "title": "Senior Distributed Systems Engineer",
+      "company": "Amazon Web Services",
+      "roleCategory": "Backend & Distributed Systems",
+      "jobDescription": "Responsibilities:\n- Design, implement, and operate multi-region microservices handling 50k+ QPS with 99.999% availability.\n- Solve concurrency, consensus algorithms (Raft/Paxos), distributed locking, and cache invalidation challenges.",
+      "resumeText": "Alex Rivera | Senior Frontend Developer\nEmail: alex.candidate@example.com | GitHub: github.com/alexrivera-dev\nSUMMARY:\nFrontend Engineer with 6 years of experience scaling React/TypeScript web apps.",
+      "parsedSummary": {
+        "keyRequirements": [
+          "Core domain competence & problem solving",
+          "Effective oral & written communication",
+          "Project management & execution rigor"
+        ],
+        "technicalStack": [
+          "Backend & Distributed Systems",
+          "Core Industry Tools"
+        ],
+        "matchingSkills": [
+          "Core background preparation",
+          "Technical / Functional foundation"
+        ],
+        "potentialGaps": [
+          "Specific company workflow alignment"
+        ],
+        "suggestedFocusAreas": [
+          "Backend & Distributed Systems technical depth",
+          "Behavioral STAR experience stories",
+          "Domain trade-offs & problem solving"
+        ]
+      },
+      "createdAt": "2026-07-27T18:17:26.893Z",
+      "updatedAt": "2026-07-27T18:17:26.893Z"
+    },
+    "tp_ms3jw9wy": {
+      "id": "tp_ms3jw9wy",
+      "userId": "demo-user",
+      "title": "Test",
+      "company": "Target Company",
+      "roleCategory": "Software Engineering",
+      "jobDescription": "Test JD",
+      "resumeText": "Test Resume",
+      "parsedSummary": {
+        "keyRequirements": [
+          "Core domain competence & problem solving",
+          "Effective oral & written communication",
+          "Project management & execution rigor"
+        ],
+        "technicalStack": [
+          "General Professional",
+          "Core Industry Tools"
+        ],
+        "matchingSkills": [
+          "Core background preparation",
+          "Technical / Functional foundation"
+        ],
+        "potentialGaps": [
+          "Specific company workflow alignment"
+        ],
+        "suggestedFocusAreas": [
+          "Role technical depth",
+          "Behavioral STAR experience stories",
+          "Domain trade-offs & problem solving"
+        ]
+      },
+      "createdAt": "2026-07-27T18:18:52.594Z",
+      "updatedAt": "2026-07-27T18:18:52.594Z"
+    },
+    "tp_ms3kz5xt": {
+      "id": "tp_ms3kz5xt",
+      "userId": "usr_ms3kysvov4ls",
+      "title": "Senior Product Manager - Engagement",
+      "company": "Meta",
+      "roleCategory": "Product Management",
+      "jobDescription": "Responsibilities:\n- Define product vision, 3-year roadmap, and success metrics for core social engagement surfaces.\n- Analyze user funnel drop-offs using SQL and A/B test experiments; balance retention vs growth trade-offs.\n- Collaborate closely with engineering leads, product designers, and cross-functional exec stakeholders.\nRequirements:\n- 4+ years of Product Management experience driving consumer or enterprise web products.\n- Mastery of product execution, metrics breakdown, prioritization frameworks (RICE), and strategic tradeoffs.\n- Strong behavioral leadership stories managing cross-functional conflicts.",
+      "resumeText": "Taylor Reed, Ph.D. | Senior Laboratory & Research Associate\nEmail: taylor.reed@biotech-research.org\n\nSUMMARY:\nBiotechnology researcher with 5+ years of lab experience in drug formulation, cell culture, molecular assays, GLP/GMP compliance, and experimental data analysis.\n\nEXPERIENCE:\nResearch Associate @ Scotman Pharmaceutical (2022 - Present)\n- Calibrated and maintained complex bio-analytical spectrometry & HPLC lab equipment with 99.8% uptime.\n- Conducted R&D experimental trials for novel drug delivery formulations, documenting SOPs in compliance with GLP/GMP.\n- Coordinated cross-functionally with Quality Assurance and Regulatory teams to accelerate audit readiness.\n\nGraduate Researcher @ University Bio Labs (2019 - 2022)\n- Managed cell culture incubators, PCR gene expression analysis, and protein purification protocols.",
+      "parsedSummary": {
+        "keyRequirements": [
+          "Core domain competence & problem solving",
+          "Effective oral & written communication",
+          "Project management & execution rigor"
+        ],
+        "technicalStack": [
+          "Product Management",
+          "Core Industry Tools"
+        ],
+        "matchingSkills": [
+          "Core background preparation",
+          "Technical / Functional foundation"
+        ],
+        "potentialGaps": [
+          "Specific company workflow alignment"
+        ],
+        "suggestedFocusAreas": [
+          "Product Management technical depth",
+          "Behavioral STAR experience stories",
+          "Domain trade-offs & problem solving"
+        ]
+      },
+      "createdAt": "2026-07-27T18:49:07.025Z",
+      "updatedAt": "2026-07-27T18:49:07.025Z"
+    },
+    "tp_ms3l2uw7": {
+      "id": "tp_ms3l2uw7",
+      "userId": "usr_ms3kysvov4ls",
+      "title": "Senior Machine Learning Engineer",
+      "company": "OpenAI",
+      "roleCategory": "AI & Data Science",
+      "jobDescription": "Responsibilities:\n- Train, evaluate, and fine-tune large language models and multi-modal neural networks.\n- Build resilient high-throughput data processing pipelines for model pre-training and reinforcement learning.\n- Optimize inference latency, batch quantization, and GPU memory utilization for production APIs.\nRequirements:\n- Strong foundations in Python, PyTorch/TensorFlow, Transformers, CUDA, and distributed training.\n- Deep understanding of model evaluation metrics, hallucinations mitigation, and prompt engineering.",
+      "resumeText": "Alex Rivera | Senior Frontend Developer\nEmail: alex.candidate@example.com | GitHub: github.com/alexrivera-dev\n\nSUMMARY:\nFrontend Engineer with 6 years of experience scaling React/TypeScript web apps. Specialized in performance optimization, design systems, and state management.\n\nEXPERIENCE:\nSenior Web Developer @ TechCore (2022 - Present)\n- Reduced web dashboard load time by 42% by implementing code-splitting, lazy loading, and dynamic SVG rendering.\n- Re-architected data fetching pipeline using React Query, cutting redundant API requests by 65%.\n- Led a team of 4 frontend engineers building high-density real-time analytics widgets.\n\nFrontend Software Engineer @ WebMetrics (2019 - 2022)\n- Built custom component library used across 12 micro-frontends with 100% WCAG accessibility compliance.\n- Resolved memory leaks in WebSocket streaming dashboard during heavy market volatility events.\n\nSKILLS:\nReact, TypeScript, Next.js, Webpack, Tailwind CSS, Jest, GraphQL, REST APIs, Web Vitals, WebSockets.",
+      "parsedSummary": {
+        "keyRequirements": [
+          "Core domain competence & problem solving",
+          "Effective oral & written communication",
+          "Project management & execution rigor"
+        ],
+        "technicalStack": [
+          "AI & Data Science",
+          "Core Industry Tools"
+        ],
+        "matchingSkills": [
+          "Core background preparation",
+          "Technical / Functional foundation"
+        ],
+        "potentialGaps": [
+          "Specific company workflow alignment"
+        ],
+        "suggestedFocusAreas": [
+          "AI & Data Science technical depth",
+          "Behavioral STAR experience stories",
+          "Domain trade-offs & problem solving"
+        ]
+      },
+      "createdAt": "2026-07-27T18:51:59.335Z",
+      "updatedAt": "2026-07-27T18:51:59.335Z"
+    },
+    "tp_ms3l82rw": {
+      "id": "tp_ms3l82rw",
+      "userId": "demo-user",
+      "title": "Senior Distributed Systems Engineer",
+      "company": "Amazon Web Services",
+      "roleCategory": "Backend & Distributed Systems",
+      "jobDescription": "Responsibilities: Design, implement, and operate multi-region microservices handling 50k+ QPS with 99.999% availability.",
+      "resumeText": "Alex Rivera | Senior Frontend Developer\nSUMMARY: Frontend Engineer with 6 years experience.",
+      "parsedSummary": {
+        "keyRequirements": [
+          "Core domain competence & problem solving",
+          "Effective oral & written communication",
+          "Project management & execution rigor"
+        ],
+        "technicalStack": [
+          "Backend & Distributed Systems",
+          "Core Industry Tools"
+        ],
+        "matchingSkills": [
+          "Core background preparation",
+          "Technical / Functional foundation"
+        ],
+        "potentialGaps": [
+          "Specific company workflow alignment"
+        ],
+        "suggestedFocusAreas": [
+          "Backend & Distributed Systems technical depth",
+          "Behavioral STAR experience stories",
+          "Domain trade-offs & problem solving"
+        ]
+      },
+      "createdAt": "2026-07-27T18:56:02.828Z",
+      "updatedAt": "2026-07-27T18:56:02.828Z"
+    },
+    "tp_ms3lkdl6": {
+      "id": "tp_ms3lkdl6",
+      "userId": "usr_ms3kysvov4ls",
+      "title": "Senior Distributed Systems Engineer",
+      "company": "Amazon Web Services",
+      "roleCategory": "Backend & Distributed Systems",
+      "jobDescription": "Responsibilities: Design, implement, and operate multi-region microservices handling 50k+ QPS with 99.999% availability.",
+      "resumeText": "Alex Rivera | Senior Frontend Developer\nSUMMARY: Frontend Engineer with 6 years experience.",
+      "parsedSummary": {
+        "keyRequirements": [
+          "Core domain competence & problem solving",
+          "Effective oral & written communication",
+          "Project management & execution rigor"
+        ],
+        "technicalStack": [
+          "Backend & Distributed Systems",
+          "Core Industry Tools"
+        ],
+        "matchingSkills": [
+          "Core background preparation",
+          "Technical / Functional foundation"
+        ],
+        "potentialGaps": [
+          "Specific company workflow alignment"
+        ],
+        "suggestedFocusAreas": [
+          "Backend & Distributed Systems technical depth",
+          "Behavioral STAR experience stories",
+          "Domain trade-offs & problem solving"
+        ]
+      },
+      "createdAt": "2026-07-27T19:05:36.714Z",
+      "updatedAt": "2026-07-27T19:05:36.714Z"
+    }
+  },
+  "interviewSessions": {
+    "sess_ms3kwdgh": {
+      "id": "sess_ms3kwdgh",
+      "userId": "demo-user",
+      "targetProfileId": "tp_ms3jtxwj",
+      "targetProfileTitle": "Test",
+      "persona": "stress_test",
+      "focusArea": "hybrid",
+      "isVoiceMode": true,
+      "totalQuestions": 5,
+      "turns": [
+        {
+          "id": "turn_1",
+          "questionNumber": 1,
+          "isFollowUp": false,
+          "question": "Could you walk me through your background and how it aligns with this role?",
+          "interviewerRationale": "Fallback introductory question.",
+          "expectedKeyPoints": [
+            "Relevant experience",
+            "Role alignment",
+            "Clear communication"
+          ]
+        }
+      ],
+      "currentTurnIndex": 0,
+      "status": "in_progress",
+      "createdAt": "2026-07-27T18:46:56.801Z"
+    },
+    "sess_ms3kzr68": {
+      "id": "sess_ms3kzr68",
+      "userId": "usr_ms3kysvov4ls",
+      "targetProfileId": "tp_ms3kz5xt",
+      "targetProfileTitle": "Senior Product Manager - Engagement",
+      "persona": "friendly",
+      "focusArea": "technical",
+      "isVoiceMode": true,
+      "totalQuestions": 5,
+      "turns": [
+        {
+          "id": "turn_1",
+          "questionNumber": 1,
+          "isFollowUp": false,
+          "question": "Could you walk me through your background and how it aligns with this role?",
+          "interviewerRationale": "Fallback introductory question.",
+          "expectedKeyPoints": [
+            "Relevant experience",
+            "Role alignment",
+            "Clear communication"
+          ],
+          "candidateAnswer": "I I did I did I did I did Wal I did walk I did walkth I did walk through I did walk through your I did walk through your background I did walk through your background I did walk through your background and I did walk through your background and how I did walk through your background and how I did walk through your background and how tell I did walk through your background and how tell I did walk through your background and how telling I did walk through your background and how telling I did walk through your background and how telling with I did walk through your background and how telling with this I did walk through your background and how telling with this was I did walk through your background and how telling with this was I did walk through your background and how telling with this was I did walk through your background and how telling with this was so I did walk through your background and how telling with this was so I did walk through your background and how telling with this was so I I did walk through your background and how telling with this was so I did I did walk through your background and how telling with this was so I did this I did walk through your background and how telling with this was so I did this I did walk through your background and how telling with this was so I did this I did walk through your background and how telling with this was so I did this",
+          "audioDurationSeconds": 8,
+          "answeredAt": "2026-07-27T18:50:03.457Z",
+          "evaluation": {
+            "score": 75,
+            "technicalDepthScore": 75,
+            "starAlignmentScore": 75,
+            "communicationClarityScore": 75,
+            "confidenceScore": 75,
+            "strengths": [
+              "Clear communication"
+            ],
+            "weaknesses": [
+              "Could provide more technical depth"
+            ],
+            "fillerWordsDetected": [],
+            "idealResponseSummary": "A top candidate would provide specific metrics and architectural details.",
+            "actionableAdvice": "Include more quantifiable results.",
+            "followUpNeeded": false
+          }
+        },
+        {
+          "id": "turn_2",
+          "questionNumber": 2,
+          "isFollowUp": false,
+          "question": "Can you elaborate on a key challenge you solved in your past roles?",
+          "interviewerRationale": "Fallback question.",
+          "expectedKeyPoints": [
+            "Challenge details",
+            "Actions taken",
+            "Results"
+          ]
+        }
+      ],
+      "currentTurnIndex": 1,
+      "status": "in_progress",
+      "createdAt": "2026-07-27T18:49:34.544Z"
+    },
+    "sess_ms3l3enz": {
+      "id": "sess_ms3l3enz",
+      "userId": "usr_ms3kysvov4ls",
+      "targetProfileId": "tp_ms3l2uw7",
+      "targetProfileTitle": "Senior Machine Learning Engineer",
+      "persona": "neutral",
+      "focusArea": "technical",
+      "isVoiceMode": true,
+      "totalQuestions": 3,
+      "turns": [
+        {
+          "id": "turn_1",
+          "questionNumber": 1,
+          "isFollowUp": false,
+          "question": "Could you walk me through your background and how it aligns with this role?",
+          "interviewerRationale": "Fallback introductory question.",
+          "expectedKeyPoints": [
+            "Relevant experience",
+            "Role alignment",
+            "Clear communication"
+          ],
+          "candidateAnswer": "background background how background how can background how can background how can I I I did I did Biotech I did biotechnology I did biotechnology I did biotechnology",
+          "audioDurationSeconds": 19,
+          "answeredAt": "2026-07-27T18:52:54.185Z",
+          "evaluation": {
+            "score": 75,
+            "technicalDepthScore": 75,
+            "starAlignmentScore": 75,
+            "communicationClarityScore": 75,
+            "confidenceScore": 75,
+            "strengths": [
+              "Clear communication"
+            ],
+            "weaknesses": [
+              "Could provide more technical depth"
+            ],
+            "fillerWordsDetected": [],
+            "idealResponseSummary": "A top candidate would provide specific metrics and architectural details.",
+            "actionableAdvice": "Include more quantifiable results.",
+            "followUpNeeded": false
+          }
+        },
+        {
+          "id": "turn_2",
+          "questionNumber": 2,
+          "isFollowUp": false,
+          "question": "Can you elaborate on a key challenge you solved in your past roles?",
+          "interviewerRationale": "Fallback question.",
+          "expectedKeyPoints": [
+            "Challenge details",
+            "Actions taken",
+            "Results"
+          ]
+        }
+      ],
+      "currentTurnIndex": 1,
+      "status": "in_progress",
+      "createdAt": "2026-07-27T18:52:24.959Z"
+    }
+  },
+  "weakSpots": {
+    "ws-1": {
+      "id": "ws-1",
+      "userId": "demo-user",
+      "category": "STAR Method",
+      "title": "Missing Quantified Impact in STAR Results",
+      "description": "Often describes actions thoroughly but ends behavioral answers without concrete metrics or business revenue/time savings data.",
+      "impactScore": 8,
+      "status": "active",
+      "occurrences": 3,
+      "remedyTip": "Conclude every STAR story with 2 specific numbers: percentage efficiency gained (e.g. 35% faster load) and business outcome (e.g. saved $50k/yr).",
+      "createdAt": "2026-07-24T18:12:39.388Z",
+      "updatedAt": "2026-07-26T18:12:39.388Z"
+    },
+    "ws-2": {
+      "id": "ws-2",
+      "userId": "demo-user",
+      "category": "Communication",
+      "title": "Hedging & Filler Words Under Pressure",
+      "description": "Tendency to use filler phrases like \"I guess\", \"kind of\", and \"um\" when asked unexpected follow-up questions during stress tests.",
+      "impactScore": 7,
+      "status": "improving",
+      "occurrences": 2,
+      "remedyTip": "Take a deliberate 2-second pause before answering instead of speaking immediately with filler words.",
+      "createdAt": "2026-07-23T18:12:39.388Z",
+      "updatedAt": "2026-07-26T18:12:39.388Z"
+    }
+  },
+  "starStories": {
+    "story-1": {
+      "id": "story-1",
+      "userId": "demo-user",
+      "title": "Slashing Dashboard Latency by 42%",
+      "category": "Performance Optimization",
+      "situation": "TechCore analytics dashboard was suffering from 4.8s initial load times, causing customer churn in enterprise accounts.",
+      "task": "As Senior Lead, I was tasked with bringing the page load time under 2.0s without reducing real-time chart features.",
+      "action": "Audited Webpack bundles, implemented Route-level code splitting, virtualized heavy data tables, and converted polling to server-sent events.",
+      "result": "Reduced load time to 1.8s (42% speedup) and lowered client memory footprint by 55%, preventing enterprise account cancellation.",
+      "metrics": [
+        "42% reduction in initial load time",
+        "55% reduction in client RAM usage",
+        "$120k ARR customer retention"
+      ],
+      "tags": [
+        "React",
+        "Performance",
+        "Code Splitting",
+        "Leadership"
+      ],
+      "isPolished": true,
+      "createdAt": "2026-07-22T18:12:39.388Z",
+      "updatedAt": "2026-07-22T18:12:39.388Z"
+    }
+  }
+}

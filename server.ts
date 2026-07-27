@@ -95,8 +95,11 @@ app.use(express.json({ limit: "10mb" }));
         );
         timeoutPromise.catch(() => {}); // prevent unhandled promise rejection if race resolves/rejects early
         
+        const parsePromise = parseJobAndResume(jobDescription, resumeText);
+        parsePromise.catch(() => {}); // prevent unhandled promise rejection if it fails after timeout
+
         parsedSummary = (await Promise.race([
-          parseJobAndResume(jobDescription, resumeText),
+          parsePromise,
           timeoutPromise
         ])) as any;
       } catch (e) {
@@ -175,17 +178,19 @@ app.use(express.json({ limit: "10mb" }));
       try {
         const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("AI timeout")), 7000));
         timeoutPromise.catch(() => {});
+        const genPromise = generateAdaptiveQuestion({
+          persona: persona || "friendly",
+          focusArea: focusArea || "hybrid",
+          jobDescription: profile.jobDescription,
+          resumeText: profile.resumeText,
+          previousTurns: [],
+          weakSpotsMemory: activeWeakSpots,
+          questionIndex: 1,
+          totalQuestions: totalQuestions || 5
+        });
+        genPromise.catch(() => {});
         q1Data = (await Promise.race([
-          generateAdaptiveQuestion({
-            persona: persona || "friendly",
-            focusArea: focusArea || "hybrid",
-            jobDescription: profile.jobDescription,
-            resumeText: profile.resumeText,
-            previousTurns: [],
-            weakSpotsMemory: activeWeakSpots,
-            questionIndex: 1,
-            totalQuestions: totalQuestions || 5
-          }),
+          genPromise,
           timeoutPromise
         ])) as any;
       } catch (e) {
@@ -269,18 +274,20 @@ app.use(express.json({ limit: "10mb" }));
       try {
         const timeoutEval = new Promise((_, reject) => setTimeout(() => reject(new Error("Eval timeout")), 4000));
         timeoutEval.catch(() => {});
+        const evalPromise = evaluateAnswer({
+          question: currentTurn.question,
+          candidateAnswer: answer,
+          expectedKeyPoints: currentTurn.expectedKeyPoints || [],
+          persona: session.persona,
+          focusArea: session.focusArea,
+          jobDescription: profile.jobDescription,
+          resumeText: profile.resumeText,
+          knownWeakSpots,
+          isFollowUp: currentTurn.isFollowUp
+        });
+        evalPromise.catch(() => {});
         evaluation = (await Promise.race([
-          evaluateAnswer({
-            question: currentTurn.question,
-            candidateAnswer: answer,
-            expectedKeyPoints: currentTurn.expectedKeyPoints || [],
-            persona: session.persona,
-            focusArea: session.focusArea,
-            jobDescription: profile.jobDescription,
-            resumeText: profile.resumeText,
-            knownWeakSpots,
-            isFollowUp: currentTurn.isFollowUp
-          }),
+          evalPromise,
           timeoutEval
         ])) as QuestionEvaluation;
       } catch (e) {
@@ -375,17 +382,19 @@ app.use(express.json({ limit: "10mb" }));
           try {
             const timeoutNext = new Promise((_, reject) => setTimeout(() => reject(new Error("Next Q timeout")), 4000));
             timeoutNext.catch(() => {});
+            const nextQPromise = generateAdaptiveQuestion({
+              persona: session.persona,
+              focusArea: session.focusArea,
+              jobDescription: profile.jobDescription,
+              resumeText: profile.resumeText,
+              previousTurns: session.turns,
+              weakSpotsMemory: activeWeakSpots,
+              questionIndex: nextQNum,
+              totalQuestions: session.totalQuestions
+            });
+            nextQPromise.catch(() => {});
             nextQData = (await Promise.race([
-              generateAdaptiveQuestion({
-                persona: session.persona,
-                focusArea: session.focusArea,
-                jobDescription: profile.jobDescription,
-                resumeText: profile.resumeText,
-                previousTurns: session.turns,
-                weakSpotsMemory: activeWeakSpots,
-                questionIndex: nextQNum,
-                totalQuestions: session.totalQuestions
-              }),
+              nextQPromise,
               timeoutNext
             ])) as any;
           } catch (e) {
@@ -416,14 +425,16 @@ app.use(express.json({ limit: "10mb" }));
           try {
             const timeoutReport = new Promise((_, reject) => setTimeout(() => reject(new Error("Report timeout")), 4000));
             timeoutReport.catch(() => {});
+            const reportPromise = generateSessionReport({
+              persona: session.persona,
+              focusArea: session.focusArea,
+              targetTitle: session.targetProfileTitle,
+              turns: session.turns,
+              jobDescription: profile.jobDescription
+            });
+            reportPromise.catch(() => {});
             report = (await Promise.race([
-              generateSessionReport({
-                persona: session.persona,
-                focusArea: session.focusArea,
-                targetTitle: session.targetProfileTitle,
-                turns: session.turns,
-                jobDescription: profile.jobDescription
-              }),
+              reportPromise,
               timeoutReport
             ])) as any;
           } catch (e) {
@@ -516,8 +527,10 @@ app.use(express.json({ limit: "10mb" }));
       try {
         const timeoutPolish = new Promise((_, reject) => setTimeout(() => reject(new Error("Polish timeout")), 4000));
         timeoutPolish.catch(() => {});
+        const polishPromise = polishSTARStory(story);
+        polishPromise.catch(() => {});
         polished = (await Promise.race([
-          polishSTARStory(story),
+          polishPromise,
           timeoutPolish
         ])) as any;
       } catch (e) {
