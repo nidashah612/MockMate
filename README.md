@@ -24,7 +24,7 @@ MockMate uses Google's Gemini API with a persistent **Weak-Spot Memory Engine** 
 
 ## b. Live Deployed URL & Repository
 - **Live Deployed App URL:** [https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app](https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app)
-- **Public GitHub Repository:** [https://github.com/mockmate-ai/mockmate-core](https://github.com/mockmate-ai/mockmate-core)
+
 
 ---
 
@@ -80,12 +80,18 @@ CRITICAL ADAPTIVE RULES:
 
 ## f. Screenshots of the App in Action
 1. **Analytics Progress Dashboard:** Overall readiness score, Recharts progress line chart, skill mastery radar, active weak spots heatmap, and interview history log.
-![Analytics Dashboard](./screenshots/dashboard.svg)
+<img width="692" height="402" alt="image" src="https://github.com/user-attachments/assets/7040e885-aa3a-4dab-8a22-96bbf429f151" />
+
 2. **Target Role & Resume Alignment Manager:** Dual-panel editor for target Job Descriptions and candidate resumes with Gemini AI gap analysis.
+   <img width="692" height="391" alt="image" src="https://github.com/user-attachments/assets/a5109123-89d1-4de4-ac53-107cbe7babb5" />
+
 3. **Adaptive Voice-Enabled Interview Simulator:** Animated interviewer persona avatar, speech soundwave indicator, microphone speech input, and immediate micro-evaluations.
-![Interview Simulator](./screenshots/interview.svg)
-4. **STAR Story Bank & AI Story Polisher:** Filterable repository of candidate project stories with 1-click Gemini metric polishing.
-![STAR Story Bank](./screenshots/star_stories.svg)
+<img width="692" height="355" alt="image" src="https://github.com/user-attachments/assets/70039a87-04a6-4b55-a1dd-a0e6e2ae31c9" />
+<img width="692" height="486" alt="image" src="https://github.com/user-attachments/assets/8e744e70-b001-418f-ac8e-10ac470ef3dc" />
+
+5. **STAR Story Bank & AI Story Polisher:** Filterable repository of candidate project stories with 1-click Gemini metric polishing.
+<img width="692" height="560" alt="image" src="https://github.com/user-attachments/assets/cae66f7d-66d7-4cc1-9aed-4da5c2b8a00e" />
+<img width="692" height="637" alt="image" src="https://github.com/user-attachments/assets/dda9d330-a769-4cbb-95da-c04e1205966d" />
 
 ---
 
