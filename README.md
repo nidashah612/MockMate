@@ -1,9 +1,6 @@
 # MockMate — AI-Powered Adaptive Mock Interviewer & Persistent Memory Coach
 
-[![Live Application](https://img.shields.io/badge/Live_App-Deployed-success?style=for-the-badge&logo=vercel)](https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app)
-[![Powered by Gemini API](https://img.shields.io/badge/Powered_By-Google_Gemini_3.6-blue?style=for-the-badge&logo=google)](https://ai.google.dev)
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-indigo.svg?style=for-the-badge)](LICENSE)
-
+[![Live Application]https://ais-pre-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app/
 ---
 
 ## a. App Name, What It Does, and Real Problem Solved
