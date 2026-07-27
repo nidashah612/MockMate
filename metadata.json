@@ -1,0 +1,6 @@
+{
+  "name": "MockMate",
+  "description": "AI-Powered Adaptive Mock Interviewer & Persistent Memory Career Coach",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
