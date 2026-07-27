@@ -40,8 +40,7 @@ MockMate uses Google's Gemini API with a persistent **Weak-Spot Memory Engine** 
 
 **Powered By:** Google Gemini API (`gemini-3.6-flash` for reasoning/evaluations & `gemini-3.1-flash-tts-preview` for voice output).
 
-### System Prompt Behind the Adaptive Interviewer & Memory Engine:
-```text
+ System Prompt Behind the Adaptive Interviewer & Memory Engine:
 YOU ARE AN ADAPTIVE MOCK INTERVIEWER & HIRING COMMITTEE LEAD.
 Persona: [Friendly Coach / Neutral Recruiter / Stress-Test Hiring Manager].
 Focus Area: [Technical / Behavioral STAR / System Design / Culture / Hybrid].
@@ -52,9 +51,7 @@ CRITICAL ADAPTIVE RULES:
 3. ADAPTIVE PROGRESSION:
    - If previous answer was vague or missing quantitative metrics, ask a direct follow-up question cross-examining their claim.
 4. Keep questions natural, spoken-style, clear, and direct.
-
-### d. **Tools, Services, and AI Models Used:**
---text
+### d. Tools, Services, and AI Models Used
 - **Frontend Framework:** React 19, TypeScript, Tailwind CSS, Recharts, Lucide-React icons.
 - **Backend Server:** Express.js, `tsx` runtime, `esbuild` CommonJS bundler.
 - **AI SDK:** `@google/genai` TypeScript SDK.
@@ -65,7 +62,8 @@ CRITICAL ADAPTIVE RULES:
 
 ## e. Screenshots of the App in Action:
 1. **Analytics Progress Dashboard:** Overall readiness score, Recharts progress line chart, skill mastery radar, active weak spots heatmap, and interview history log.
-<img width="692" height="402" alt="image" src="https://github.com/user-attachments/assets/7040e885-aa3a-4dab-8a22-96bbf429f151" />
+<img width="692" height="402" alt="image" src="https://github.com/user-attachments/assets/08dc9e85-afb1-432b-b8e6-85a3a68376f9" />
+
 
 2. **Target Role & Resume Alignment Manager:** Dual-panel editor for target Job Descriptions and candidate resumes with Gemini AI gap analysis.
    <img width="692" height="391" alt="image" src="https://github.com/user-attachments/assets/a5109123-89d1-4de4-ac53-107cbe7babb5" />
