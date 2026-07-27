@@ -1,7 +1,6 @@
 # MockMate — AI-Powered Adaptive Mock Interviewer & Persistent Memory Coach
 
-[![Live Application]https://ais-pre-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app/
----
+[Live Application]https://ais-pre-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app/
 
 ## a. App Name, What It Does, and Real Problem Solved
 
@@ -20,15 +19,7 @@ Job candidates frequently suffer from "interview anxiety" and experience repeate
 ### **MockMate's Solution:**
 MockMate uses Google's Gemini API with a persistent **Weak-Spot Memory Engine** across sessions. It cross-examines candidates on their actual resume claims, detects filler words and missing STAR metrics in real-time, auto-builds a polished STAR Story Bank from their answers, and continuously targets past weak spots in subsequent mock interviews until they achieve 100% interview readiness.
 
----
-
-## b. Live Deployed URL & Repository
-- **Live Deployed App URL:** [https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app](https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app)
-
-
----
-
-## c. Comprehensive Features List
+## b. Comprehensive Features List
 1. **Multi-Auth & Session Management:** Email + Password login/registration, Password Reset flow, Google Sign-In, and persistent user session storage.
 2. **Resume & Job Description (JD) AI Alignment Parser:** Paste target JDs alongside resume text or upload files. Gemini parses key requirements, technical stack matching, experience gaps, and suggested focus areas.
 3. **Adaptive Mock Interview Simulator:**
@@ -45,9 +36,7 @@ MockMate uses Google's Gemini API with a persistent **Weak-Spot Memory Engine** 
 6. **Auto-Built STAR Story Bank:** Automatically extracts concrete project stories from answers, formats them into Situation, Task, Action, and Result, and provides a 1-click Gemini AI Story Polisher.
 7. **Progress Dashboard & Analytics:** Recharts readiness score trend line graph, skill mastery radar chart, active weak spots heatmap, and interview history.
 
----
-
-## d. AI Feature & System Prompts Behind It
+## c. AI Feature & System Prompts Behind It
 
 **Powered By:** Google Gemini API (`gemini-3.6-flash` for reasoning/evaluations & `gemini-3.1-flash-tts-preview` for voice output).
 
@@ -63,11 +52,8 @@ CRITICAL ADAPTIVE RULES:
 3. ADAPTIVE PROGRESSION:
    - If previous answer was vague or missing quantitative metrics, ask a direct follow-up question cross-examining their claim.
 4. Keep questions natural, spoken-style, clear, and direct.
-```
 
----
-
-## e. Tools, Services, and AI Models Used
+## d. Tools, Services, and AI Models Used
 - **Frontend Framework:** React 19, TypeScript, Tailwind CSS, Recharts, Lucide-React icons.
 - **Backend Server:** Express.js, `tsx` runtime, `esbuild` CommonJS bundler.
 - **AI SDK:** `@google/genai` TypeScript SDK.
@@ -76,9 +62,7 @@ CRITICAL ADAPTIVE RULES:
   - `gemini-3.1-flash-tts-preview` (Server-side text-to-speech audio synthesis)
 - **Audio APIs:** Web Speech API (SpeechRecognition for STT speech input & SpeechSynthesis for voice playback).
 
----
-
-## f. Screenshots of the App in Action
+## e. Screenshots of the App in Action
 1. **Analytics Progress Dashboard:** Overall readiness score, Recharts progress line chart, skill mastery radar, active weak spots heatmap, and interview history log.
 <img width="692" height="402" alt="image" src="https://github.com/user-attachments/assets/7040e885-aa3a-4dab-8a22-96bbf429f151" />
 
@@ -93,9 +77,7 @@ CRITICAL ADAPTIVE RULES:
 <img width="692" height="560" alt="image" src="https://github.com/user-attachments/assets/cae66f7d-66d7-4cc1-9aed-4da5c2b8a00e" />
 <img width="692" height="637" alt="image" src="https://github.com/user-attachments/assets/dda9d330-a769-4cbb-95da-c04e1205966d" />
 
----
-
-## g. How to Run the Project Locally
+## f. How to Run the Project Locally
 
 ### Prerequisites
 - Node.js 20+ installed.
