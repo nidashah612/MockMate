@@ -1,8 +1,8 @@
 
 ---
 ## a. Live Deployed URL & Repository
-- **Live Deployed App URL:** [https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app](https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app)
-- **Public GitHub Repository:** [https://github.com/mockmate-ai/mockmate-core](https://github.com/mockmate-ai/mockmate-core)
+- **Live Deployed App URL:** [[https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app](https://ais-dev-ygf6f7dpbopive4wylkobt-924820896608.asia-east1.run.app)](https://mock-mate-phi-six.vercel.app/)
+
 
 ---
 
